@@ -6,7 +6,7 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import javax.inject.Inject
 
-class ApiSerivce @Inject constructor(private val client : HttpClient) {
+class ApiService @Inject constructor(private val client : HttpClient) {
 
     suspend fun getPokemonList(
          limit : Int,

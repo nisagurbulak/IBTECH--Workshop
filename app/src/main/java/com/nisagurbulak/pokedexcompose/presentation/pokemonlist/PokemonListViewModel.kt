@@ -38,7 +38,7 @@ class PokemonListViewModel @Inject constructor(
     }
 
     //result = Resource<PokemonList> <-- repository.getPokemonList
-    // pokemonList ' i çektik result ile result succes mi değil mi?
+    // result is success or not ?
     //when(result)  ->> Resource.Success or Resource.Error
     //Loading the results from the api was successful or not
     // result.data!!.count --> actual size of our list
@@ -47,7 +47,9 @@ class PokemonListViewModel @Inject constructor(
             isLoading.value = true
             when (val result = repository.getPokemonList(PAGE_SIZE, currentPage * PAGE_SIZE)) {
                 is Resource.Success -> {
-                    endReached.value = currentPage * PAGE_SIZE >= result.data!!.count
+                    endReached.value = currentPage * PAGE_SIZE >= result.data!!.count // count -->1154 is const!!!
+
+                    // "results":[{"name":"bulbasaur","url":"https://pokeapi.co/api/v2/pokemon/1/"}  // PAGE_SIZE = 1 oldugunda
 
                     val pokedexEntries = result.data.results.mapIndexed { index, entry ->
 
@@ -64,7 +66,7 @@ class PokemonListViewModel @Inject constructor(
                     currentPage++
                     loadError.value = ""
                     isLoading.value = false
-                    pokemonList.value += pokedexEntries
+                    pokemonList.value += pokedexEntries  // 20 - 20 dolduruyoruz.  // asıl ekrana gelen List
                 }
 
                 is Resource.Error -> {
@@ -92,8 +94,6 @@ class PokemonListViewModel @Inject constructor(
         lateinit var request: ImageRequest
         viewModelScope.launch {
             // Requesting the image using coil's ImageRequest
-
-
             request = ImageRequest.Builder(context)
                 .data(url)
                 .crossfade(true)

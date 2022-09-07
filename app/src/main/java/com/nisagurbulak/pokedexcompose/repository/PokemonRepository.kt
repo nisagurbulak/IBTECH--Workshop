@@ -1,7 +1,7 @@
 package com.nisagurbulak.pokedexcompose.repository
 
 import com.nisagurbulak.pokedexcompose.common.Resource
-import com.nisagurbulak.pokedexcompose.data.network.ApiSerivce
+import com.nisagurbulak.pokedexcompose.data.network.ApiService
 import com.nisagurbulak.pokedexcompose.data.remote.responses.Pokemon
 import com.nisagurbulak.pokedexcompose.data.remote.responses.PokemonList
 import dagger.hilt.android.scopes.ActivityScoped
@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @ActivityScoped
 class PokemonRepository  @Inject constructor(
-    private val api : ApiSerivce
+    private val api : ApiService
 ) {
 
     suspend fun getPokemonList(limit: Int, offset: Int): Resource<PokemonList> {

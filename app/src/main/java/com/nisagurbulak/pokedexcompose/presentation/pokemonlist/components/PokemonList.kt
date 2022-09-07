@@ -29,16 +29,23 @@ fun PokemonList(
 
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
         val itemCount = if(pokemonList.size % 2 == 0) {
-            viewModel.pokemonList.value.size / 2
+            pokemonList.size / 2
         } else {
             pokemonList.size / 2 + 1
         }
         items(itemCount) {
-            if(it >= itemCount - 1 && !endReached) {
+
+            // itemCount --> rowCount  // it --> current index
+            //rowIndex starts at 0
+            //how do we know scrolled and we should call loadPokemonPaginated() ?
+            //if endReached , we dont want to paginate
+            if(it >= itemCount - 1 && !endReached && !isLoading) {
                 viewModel.loadPokemonPaginated()
             }
+
             PokedexRow(rowIndex = it, entries = pokemonList, navController = navController)
         }
+
     }
 
     Box(

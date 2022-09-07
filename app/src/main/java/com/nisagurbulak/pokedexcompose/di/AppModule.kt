@@ -2,7 +2,7 @@ package com.nisagurbulak.pokedexcompose.di
 
 
 import android.util.Log
-import com.nisagurbulak.pokedexcompose.data.network.ApiSerivce
+import com.nisagurbulak.pokedexcompose.data.network.ApiService
 import com.nisagurbulak.pokedexcompose.repository.PokemonRepository
 import dagger.Module
 import dagger.Provides
@@ -23,7 +23,7 @@ object AppModule {
     @Singleton
     @Provides
     fun providePokemonRepository(
-        api : ApiSerivce
+        api : ApiService
     ) = PokemonRepository(api)
 
 
