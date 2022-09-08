@@ -26,6 +26,7 @@ fun PokemonList(
     val endReached by remember { viewModel.endReached }
     val loadError by remember { viewModel.loadError }
     val isLoading by remember { viewModel.isLoading }
+    val isSearching by remember { viewModel.isSearching }
 
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
         val itemCount = if(pokemonList.size % 2 == 0) {
@@ -39,7 +40,7 @@ fun PokemonList(
             //rowIndex starts at 0
             //how do we know scrolled and we should call loadPokemonPaginated() ?
             //if endReached , we dont want to paginate
-            if(it >= itemCount - 1 && !endReached && !isLoading) {
+            if(it >= itemCount - 1 && !endReached && !isLoading && !isSearching) {
                 viewModel.loadPokemonPaginated()
             }
 

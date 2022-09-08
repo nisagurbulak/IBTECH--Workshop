@@ -11,12 +11,14 @@ import com.nisagurbulak.pokedexcompose.R
 import androidx.compose.foundation.Image
 import androidx.compose.material.*
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.nisagurbulak.pokedexcompose.presentation.pokemonlist.components.PokemonList
 import com.nisagurbulak.pokedexcompose.presentation.pokemonlist.components.SearchBar
 
 
 @Composable
-fun PokemonListScreen(navController: NavController) {
+fun PokemonListScreen(navController: NavController,
+                      viewModel : PokemonListViewModel = hiltViewModel()) {
     Surface(
         color = MaterialTheme.colors.background,
         modifier =  Modifier.fillMaxSize()
@@ -34,7 +36,7 @@ fun PokemonListScreen(navController: NavController) {
                 .fillMaxWidth()
                 .padding(16.dp),
                 hint = "Search...") {
-                //onsearch method is the last parameter of the composable function
+                viewModel.searchPokemonList(it)
             }
             Spacer(modifier = Modifier.height(16.dp))
             PokemonList(navController = navController)
